@@ -2,6 +2,7 @@
 # get wifi password in windows with python
 # author:WeiJie-Su
 # date:2018/08/31
+# update:2019/07/26
 
 import os
 
@@ -10,6 +11,8 @@ command = "netsh wlan show profiles"
 wifi_list = []
 for line in os.popen(command).readlines():
 	line = line.strip('\r\n')
+	if "There is no wireless interface on the system." in line: print("no wifi interface"), exit()
+	if "系統上沒有無線介面。" in line: print("no wifi interface"), exit()
 	if "所有使用者設定檔" in line:
 		line = line.split(" : ")[1]
 		wifi_list.append(line)
